@@ -1,9 +1,14 @@
 $(document).ready(function() {
+
+	// Getting width of the container and dividing it to the children equally
+
 	var datesliderlength = $('.date-slider').width();
 	$('.date-slider ul').width(datesliderlength);
 
 	var contentslider = $(".content-slider li").length;
 	$(".content-slider ul").css("width", contentslider*100 + "%");
+
+	// Getting the data properties of the dates and relatively positioning them based on each other's date
 
 	$(function() {
 		function getdatevalue(elem) {
@@ -12,10 +17,12 @@ $(document).ready(function() {
 			var datetotal = [datetanggal, datebulan];
 			return datetotal;
 		}
+
+		// This is the core of the mathematic function
 		
 		var datefirst = getdatevalue('.date-slider li:first-child');
 		var datelast = getdatevalue('.date-slider li:last-child');
-		var datedays = Math.abs(datelast[0] - datefirst[0]);
+		var datedays = datelast[0] - datefirst[0];
 		var datejarakdays = Math.abs(((datelast[1] - datefirst[1]) * 30) + (datelast[0] - datefirst[0]));
 
 		$('.date-slider li').each(function() {
@@ -25,6 +32,8 @@ $(document).ready(function() {
 			$(this).css('left', datejarakcurrent/datejarakdays*97 + '%');
 		})
 	})
+
+	// The slider function
 
 	$(function() {
 
@@ -66,6 +75,8 @@ $(document).ready(function() {
 		}
 
 	});
+
+	// Adding class to each child to make it more recognizable
 
 	$(function() {
 		for (var i = 1; i <= contentslider; i++) {
